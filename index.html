@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kosmic &middot; The sky, kept for you.</title>
+<meta name="description" content="A daily reading drawn from where the Moon actually is, a place to keep the signs you notice, and the charts of the people you love. Computed on your iPhone. Nothing leaves it.">
+<link rel="canonical" href="https://kosmicapp.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Kosmic">
+<meta property="og:url" content="https://kosmicapp.com/">
+<meta property="og:title" content="Kosmic &middot; The sky, kept for you.">
+<meta property="og:description" content="A daily reading drawn from where the Moon actually is, a place to keep the signs you notice, and the charts of the people you love. Computed on your iPhone. Nothing leaves it.">
+<meta property="og:image" content="https://kosmicapp.com/og-image.png">
+<meta property="og:image:secure_url" content="https://kosmicapp.com/og-image.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A watercolor moon on a twilight sky, with the word Kosmic beneath it.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Kosmic &middot; The sky, kept for you.">
+<meta name="twitter:description" content="A daily reading drawn from where the Moon actually is. Computed on your iPhone. Nothing leaves it.">
+<meta name="twitter:image" content="https://kosmicapp.com/og-image.png">
+<meta name="theme-color" content="#1a1b3d">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+    --sky-top:      #1a1b3d;
+    --sky-violet:   #241a44;
+    --sky-slate:    #222b3c;
+    --sky-mid:      #3b4960;
+    --night:        #0f141f;
+    --night-deep:   #0b0f18;
+
+    --title:   #eef1fb;
+    --body:    #d9ddef;
+    --muted:   #9aa3c4;
+
+    --gold:      #ddb46a;
+    --gold-soft: rgba(221, 180, 106, 0.16);
+
+    --wash-1: #5f7cab;
+    --wash-2: #7d94bd;
+    --wash-3: #46648f;
+
+    --hairline:      rgba(199, 210, 242, 0.13);
+    --hairline-soft: rgba(199, 210, 242, 0.07);
+    --panel:         rgba(222, 228, 244, 0.035);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+html, body {
+    background: var(--night);
+    color: var(--body);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+}
+::selection { background: rgba(221, 180, 106, 0.26); color: var(--title); }
+
+.container { max-width: 1180px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 2; }
+
+/* ============ LOAD-IN ============ */
+.rise { opacity: 0; transform: translateY(18px); animation: rise 0.95s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.rise-1 { animation-delay: 0.08s; }
+.rise-2 { animation-delay: 0.20s; }
+.rise-3 { animation-delay: 0.36s; }
+.rise-4 { animation-delay: 0.52s; }
+.rise-5 { animation-delay: 0.30s; }
+@keyframes rise { to { opacity: 1; transform: translateY(0); } }
+
+.reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: var(--d, 0s);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ============ HERO ============ */
+.hero {
+    position: relative;
+    padding: 6rem 0 6.5rem;
+    overflow: hidden;
+    background:
+        radial-gradient(ellipse 55% 34% at 68% 22%, rgba(222, 228, 244, 0.10) 0%, rgba(222, 228, 244, 0) 70%),
+        radial-gradient(ellipse 95% 26% at 50% 52%, rgba(235, 180, 140, 0.11) 0%, rgba(235, 180, 140, 0) 76%),
+        linear-gradient(180deg, var(--sky-top) 0%, var(--sky-violet) 15%, #2b3450 44%, var(--sky-slate) 70%, var(--night) 100%);
+}
+.starfield { position: absolute; inset: 0; pointer-events: none; z-index: 1; opacity: 0.85; }
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 3.5rem;
+    align-items: center;
+}
+
+h1 {
+    font-family: 'Newsreader', Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(3rem, 6.4vw, 5.4rem);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    color: var(--title);
+    margin-bottom: 1.6rem;
+}
+h1 em { font-style: italic; color: var(--gold); font-weight: 300; }
+
+.lede {
+    font-family: 'Newsreader', Georgia, serif;
+    font-weight: 300;
+    font-size: clamp(1.15rem, 1.5vw, 1.4rem);
+    line-height: 1.6;
+    color: var(--body);
+    max-width: 34em;
+    margin-bottom: 2.6rem;
+}
+
+/* ============ WAITLIST ============ */
+.signup { max-width: 480px; }
+form {
+    display: flex;
+    gap: 0.6rem;
+    align-items: stretch;
+}
+input[type="email"] {
+    flex: 1 1 auto;
+    min-width: 0;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 0.95rem;
+    color: var(--title);
+    background: rgba(10, 14, 24, 0.42);
+    border: 1px solid var(--hairline);
+    border-radius: 10px;
+    padding: 0.85rem 1rem;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+input[type="email"]::placeholder { color: rgba(154, 163, 196, 0.72); }
+input[type="email"]:focus {
+    outline: none;
+    border-color: rgba(221, 180, 106, 0.55);
+    background: rgba(10, 14, 24, 0.62);
+}
+button {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 0.92rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    color: #1b1408;
+    background: var(--gold);
+    border: 1px solid var(--gold);
+    border-radius: 10px;
+    padding: 0.85rem 1.35rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+button:hover { background: #e8c583; box-shadow: 0 8px 26px rgba(221, 180, 106, 0.22); }
+button:active { transform: translateY(1px); }
+button:disabled { opacity: 0.6; cursor: default; box-shadow: none; }
+
+.gotcha { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.visually-hidden { position: absolute; left: -9999px; }
+
+.form-note {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+    letter-spacing: 0.01em;
+}
+.status {
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 1.12rem;
+    font-style: italic;
+    color: var(--gold);
+    line-height: 1.5;
+}
+.status:empty { display: none; }
+.status.err { color: var(--muted); font-style: normal; font-family: 'Inter', system-ui, sans-serif; font-size: 0.9rem; }
+
+/* ============ PHONE ============ */
+.hero-visual { display: flex; justify-content: center; --s: 0.85; }
+.phone-scaler { width: calc(390px * var(--s)); height: calc(844px * var(--s)); }
+.phone {
+    width: 390px;
+    height: 844px;
+    transform: scale(var(--s));
+    transform-origin: top left;
+    border-radius: 54px;
+    padding: 11px;
+    background: linear-gradient(160deg, #39405a 0%, #12161f 42%, #0a0d14 100%);
+    box-shadow:
+        0 2px 1px rgba(255, 255, 255, 0.10) inset,
+        0 42px 90px rgba(4, 6, 12, 0.62),
+        0 10px 30px rgba(4, 6, 12, 0.45);
+}
+.screen {
+    width: 100%;
+    height: 100%;
+    border-radius: 44px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 62px 28px 0;
+    color: var(--title);
+    font-family: 'Newsreader', Georgia, serif;
+    background:
+        radial-gradient(ellipse 60% 30% at 50% 24%, rgba(222, 228, 244, 0.14) 0%, rgba(222, 228, 244, 0) 70%),
+        radial-gradient(ellipse 85% 12% at 50% 44%, rgba(235, 180, 140, 0.26) 0%, rgba(235, 180, 140, 0) 76%),
+        radial-gradient(ellipse 95% 32% at 50% 30%, rgba(126, 144, 176, 0.30) 0%, rgba(126, 144, 176, 0) 74%),
+        radial-gradient(ellipse 92% 22% at 50% 100%, rgba(224, 168, 122, 0.10) 0%, rgba(224, 168, 122, 0) 70%),
+        radial-gradient(ellipse 130% 110% at 50% 36%, rgba(0, 0, 0, 0) 50%, rgba(6, 9, 16, 0.55) 100%),
+        linear-gradient(180deg, #222b3c 0%, #3b4960 30%, #2a3448 54%, #161d2b 76%, #0f141f 100%);
+}
+.screen-stars { position: absolute; top: 0; left: 0; width: 390px; height: 320px; pointer-events: none; }
+
+.screen-date {
+    text-align: center;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    color: var(--muted);
+}
+
+.moon-stage { display: flex; justify-content: center; margin-top: 34px; }
+.moon-wrap { position: relative; width: 180px; height: 180px; }
+.moon-halo {
+    position: absolute; left: 33px; top: 33px; width: 114px; height: 114px;
+    border-radius: 50%;
+    box-shadow: 0 0 30px 10px rgba(246, 214, 140, 0.40), 0 0 70px 28px rgba(240, 190, 110, 0.18);
+}
+.moon-disc { position: absolute; left: 33px; top: 33px; width: 114px; height: 114px; }
+.moon-arc { position: absolute; left: 0; top: 0; width: 180px; height: 180px; }
+
+.screen-name { text-align: center; margin-top: 28px; }
+.screen-name h2 {
+    font-family: 'Newsreader', Georgia, serif;
+    font-weight: 400;
+    font-size: 31px;
+    line-height: 1.15;
+    color: #eef0fa;
+    letter-spacing: -0.01em;
+}
+.screen-name .sanskrit {
+    margin-top: 9px;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    color: var(--gold);
+    opacity: 0.9;
+}
+.screen-read {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    font-size: 16.5px;
+    line-height: 1.62;
+    font-weight: 300;
+    color: var(--body);
+}
+.screen-spacer { flex-grow: 1; }
+.screen-foot {
+    border-top: 1px solid var(--hairline);
+    padding: 18px 4px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.screen-foot span {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    color: var(--gold);
+    text-shadow: 0 0 14px rgba(221, 180, 106, 0.4);
+}
+
+/* Floating capsule tab bar */
+.tabbar {
+    margin: 0 -6px 30px;
+    height: 62px;
+    border-radius: 34px;
+    background: rgba(18, 24, 38, 0.78);
+    border: 1px solid rgba(199, 210, 242, 0.13);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 10px 28px rgba(4, 6, 12, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 12px;
+    position: relative;
+}
+.tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 9.5px;
+    letter-spacing: 0.12em;
+    color: #6d738a;
+}
+.tab.on { color: #e9ecf6; }
+.tab-plus {
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    background: linear-gradient(160deg, #e8c583 0%, #ddb46a 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 20px rgba(221, 180, 106, 0.34);
+    flex-shrink: 0;
+}
+
+/* ============ SECTIONS ============ */
+section.band { padding: 7rem 0; border-top: 1px solid var(--hairline-soft); }
+.hero + section.band { border-top: none; padding-top: 5.5rem; }
+.eyebrow {
+    font-family: 'Newsreader', Georgia, serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 1.05rem;
+    color: var(--muted);
+    margin-bottom: 2.8rem;
+}
+h2.band-title {
+    font-family: 'Newsreader', Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(1.9rem, 3.4vw, 2.8rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--title);
+    margin-bottom: 2.6rem;
+    max-width: 20em;
+}
+
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; }
+
+.card {
+    padding: 2rem 1.75rem 2.1rem;
+    background: var(--panel);
+    border: 1px solid var(--hairline-soft);
+    border-radius: 16px;
+    transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+}
+.card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(221, 180, 106, 0.30);
+    background: rgba(222, 228, 244, 0.055);
+}
+.card-index {
+    display: block;
+    font-family: 'Newsreader', Georgia, serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--gold);
+    margin-bottom: 1rem;
+}
+.card h3 {
+    font-family: 'Newsreader', Georgia, serif;
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 1.25;
+    color: var(--title);
+    margin-bottom: 0.7rem;
+}
+.card p { font-size: 0.95rem; line-height: 1.62; color: var(--muted); }
+
+/* Rows */
+.rows { border-top: 1px solid var(--hairline-soft); }
+.row {
+    display: grid;
+    grid-template-columns: 15rem 1fr;
+    gap: 2rem;
+    padding: 1.9rem 0;
+    border-bottom: 1px solid var(--hairline-soft);
+    align-items: baseline;
+}
+.row dt {
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 1.25rem;
+    color: var(--title);
+    font-weight: 400;
+}
+.row dd { font-size: 1rem; line-height: 1.66; color: var(--muted); }
+
+/* Promise */
+.promise { background: linear-gradient(180deg, var(--night) 0%, var(--night-deep) 100%); }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem 3rem; }
+.promise-item { padding: 1.5rem 0; border-top: 1px solid var(--hairline-soft); }
+.promise-item h3 {
+    font-family: 'Newsreader', Georgia, serif;
+    font-weight: 400;
+    font-size: 1.3rem;
+    color: var(--title);
+    margin-bottom: 0.5rem;
+}
+.promise-item p { font-size: 0.97rem; line-height: 1.66; color: var(--muted); }
+.promise-close {
+    margin-top: 3.2rem;
+    font-family: 'Newsreader', Georgia, serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(1.2rem, 2.1vw, 1.6rem);
+    line-height: 1.5;
+    color: var(--body);
+    max-width: 30em;
+}
+.promise-close .gold { color: var(--gold); font-style: normal; }
+
+/* ============ FOOTER ============ */
+footer { background: var(--night-deep); }
+.footer {
+    padding: 3rem 0 4rem;
+    border-top: 1px solid var(--hairline-soft);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.75rem;
+    align-items: center;
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+.footer a {
+    color: var(--muted);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+}
+.footer a:hover { color: var(--gold); border-bottom-color: rgba(221, 180, 106, 0.5); }
+.footer-mark { margin-left: auto; font-family: 'Newsreader', Georgia, serif; font-style: italic; color: rgba(154, 163, 196, 0.8); }
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 1080px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 4rem; }
+    .hero { padding: 4.5rem 0 5rem; }
+    .hero-visual { --s: 0.74; }
+    h1 { font-size: clamp(2.9rem, 9vw, 4.4rem); }
+    .row { grid-template-columns: 12rem 1fr; }
+}
+@media (max-width: 860px) {
+    .grid-3 { grid-template-columns: 1fr; }
+    .grid-2 { grid-template-columns: 1fr; gap: 0; }
+    .row { grid-template-columns: 1fr; gap: 0.5rem; }
+    section.band { padding: 4.5rem 0; }
+}
+@media (max-width: 600px) {
+    .container { padding: 0 1.5rem; }
+    .hero-visual { --s: calc((100vw - 3.5rem) / 390); }
+    form { flex-direction: column; }
+    button { width: 100%; }
+    .footer-mark { margin-left: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .rise, .reveal { opacity: 1; transform: none; animation: none; transition: none; }
+    .card:hover { transform: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+    <svg class="starfield" viewBox="0 0 1440 760" preserveAspectRatio="xMidYMin slice" aria-hidden="true" fill="none">
+        <circle cx="140" cy="96" r="1.4" fill="#cfd9f5" opacity="0.6"/>
+        <circle cx="322" cy="52" r="1" fill="#f2d9a6" opacity="0.5"/>
+        <circle cx="512" cy="168" r="1.3" fill="#ffffff" opacity="0.55"/>
+        <circle cx="746" cy="74" r="0.9" fill="#cfd9f5" opacity="0.42"/>
+        <circle cx="960" cy="132" r="1.5" fill="#ffffff" opacity="0.5"/>
+        <circle cx="1188" cy="60" r="1.1" fill="#f2d9a6" opacity="0.45"/>
+        <circle cx="1330" cy="196" r="1.2" fill="#cfd9f5" opacity="0.5"/>
+        <circle cx="86" cy="286" r="1" fill="#e8b98a" opacity="0.4"/>
+        <circle cx="404" cy="330" r="0.9" fill="#cfd9f5" opacity="0.35"/>
+        <circle cx="1258" cy="378" r="1" fill="#ffffff" opacity="0.32"/>
+        <circle cx="612" cy="418" r="0.8" fill="#cfd9f5" opacity="0.28"/>
+        <circle cx="880" cy="486" r="1" fill="#e8b98a" opacity="0.26"/>
+        <circle cx="222" cy="520" r="0.9" fill="#cfd9f5" opacity="0.24"/>
+    </svg>
+
+    <div class="container hero-grid">
+        <div class="hero-copy">
+            <h1 class="rise rise-1">The sky,<br><em>kept for you</em>.</h1>
+
+            <p class="lede rise rise-2">Each day Kosmic tells you where the Moon is resting, what that tends to mean for you, and what the day is good for. All of it is computed on your iPhone, and none of it is sent anywhere.</p>
+
+            <div class="signup rise rise-3">
+                <form id="waitlist" action="https://formspree.io/f/mgonopba" method="POST" novalidate>
+                    <label class="visually-hidden" for="email">Email address</label>
+                    <input id="email" type="email" name="email" placeholder="you@example.com" required autocomplete="email" spellcheck="false" inputmode="email">
+                    <input type="hidden" name="_subject" value="Kosmic waitlist">
+                    <input type="hidden" name="source" value="kosmicapp.com">
+                    <div class="gotcha" aria-hidden="true">
+                        <label for="_gotcha">Leave this field empty</label>
+                        <input id="_gotcha" type="text" name="_gotcha" tabindex="-1" autocomplete="off">
+                    </div>
+                    <button type="submit">Keep me posted</button>
+                </form>
+                <p class="status" id="status" role="status" aria-live="polite"></p>
+                <p class="form-note" id="formNote">Coming to the App Store. iPhone, iOS 17 and later.</p>
+            </div>
+        </div>
+
+        <div class="hero-visual rise rise-5">
+            <div class="phone-scaler">
+                <div class="phone" aria-hidden="true">
+                    <div class="screen">
+                        <svg class="screen-stars" viewBox="0 0 390 320" fill="none">
+                            <circle cx="52" cy="88" r="1.3" fill="#cfd9f5" opacity="0.7"/>
+                            <circle cx="118" cy="42" r="0.9" fill="#f2d9a6" opacity="0.55"/>
+                            <circle cx="332" cy="70" r="1.4" fill="#ffffff" opacity="0.75"/>
+                            <circle cx="296" cy="150" r="0.8" fill="#cfd9f5" opacity="0.4"/>
+                            <circle cx="74" cy="208" r="1.1" fill="#e8b98a" opacity="0.5"/>
+                            <circle cx="352" cy="228" r="0.9" fill="#cfd9f5" opacity="0.45"/>
+                            <circle cx="196" cy="30" r="0.8" fill="#ffffff" opacity="0.4"/>
+                            <circle cx="38" cy="150" r="0.8" fill="#f2d9a6" opacity="0.4"/>
+                            <circle cx="262" cy="52" r="1.1" fill="#cfd9f5" opacity="0.55"/>
+                            <circle cx="150" cy="120" r="0.7" fill="#ffffff" opacity="0.3"/>
+                            <circle cx="318" cy="262" r="1" fill="#e8b98a" opacity="0.45"/>
+                        </svg>
+
+                        <div class="screen-date">WEDNESDAY 26 AUGUST</div>
+
+                        <div class="moon-stage">
+                            <div class="moon-wrap">
+                                <div class="moon-halo"></div>
+                                <svg class="moon-disc" viewBox="0 0 120 120" fill="none">
+                                    <defs>
+                                        <radialGradient id="kWash" cx="42%" cy="36%" r="80%">
+                                            <stop offset="0%" stop-color="#fdfeff"/>
+                                            <stop offset="55%" stop-color="#ecf1f9"/>
+                                            <stop offset="82%" stop-color="#d3ddee"/>
+                                            <stop offset="100%" stop-color="#b6c6e0"/>
+                                        </radialGradient>
+                                        <clipPath id="kClip"><circle cx="60" cy="60" r="57"/></clipPath>
+                                        <filter id="kWatercolor" x="-25%" y="-25%" width="150%" height="150%">
+                                            <feTurbulence type="fractalNoise" baseFrequency="0.07" numOctaves="3" seed="7" result="noise"/>
+                                            <feDisplacementMap in="SourceGraphic" in2="noise" scale="9"/>
+                                            <feGaussianBlur stdDeviation="0.5"/>
+                                        </filter>
+                                    </defs>
+                                    <circle cx="60" cy="60" r="56" fill="url(#kWash)" filter="url(#kWatercolor)"/>
+                                    <g clip-path="url(#kClip)" filter="url(#kWatercolor)">
+                                        <path d="M34 36 C30 26 44 20 54 26 C62 20 74 24 72 32 C80 34 78 44 68 44 C60 50 40 46 34 36 Z" fill="#5f7cab" opacity="0.45"/>
+                                        <circle cx="80" cy="30" r="5" fill="#46648f" opacity="0.4"/>
+                                        <circle cx="88" cy="42" r="3.5" fill="#46648f" opacity="0.35"/>
+                                        <path d="M26 58 C22 50 32 44 40 48 C46 44 54 50 50 58 C54 64 44 70 36 66 C28 68 24 64 26 58 Z" fill="#7d94bd" opacity="0.5"/>
+                                        <path d="M62 70 C58 60 72 56 80 62 C90 60 94 70 88 76 C90 84 76 88 70 82 C62 86 58 78 62 70 Z" fill="#5f7cab" opacity="0.5"/>
+                                        <circle cx="46" cy="84" r="5" fill="#7d94bd" opacity="0.45"/>
+                                        <circle cx="58" cy="91" r="3" fill="#7d94bd" opacity="0.4"/>
+                                        <circle cx="63" cy="47" r="3" fill="#8ba3c9" opacity="0.45"/>
+                                        <ellipse cx="74" cy="46" rx="10" ry="7" fill="#f4f8fd" opacity="0.5"/>
+                                        <circle cx="60" cy="60" r="55" stroke="#4d6a9a" stroke-width="2.5" opacity="0.3"/>
+                                    </g>
+                                </svg>
+                                <svg class="moon-arc" viewBox="0 0 200 200" fill="none">
+                                    <defs>
+                                        <linearGradient id="kArc" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" stop-color="#8b9ee2"/>
+                                            <stop offset="100%" stop-color="#ddb46a"/>
+                                        </linearGradient>
+                                    </defs>
+                                    <circle cx="100" cy="100" r="78" stroke="rgba(148, 170, 240, 0.14)" stroke-width="3"/>
+                                    <circle cx="100" cy="100" r="78" stroke="url(#kArc)" stroke-width="3" stroke-linecap="round" stroke-dasharray="456 490" transform="rotate(-90 100 100)"/>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="screen-name">
+                            <h2>The Star of Growth</h2>
+                            <div class="sanskrit">ROHINI &middot; &#2352;&#2379;&#2361;&#2367;&#2339;&#2368;</div>
+                        </div>
+
+                        <div class="screen-read">
+                            <div>Of the twenty-seven mansions, this is the one the Moon loves most. What you tend today tends to take root.</div>
+                            <div>Give your attention to the one thing you want more of, and let the rest wait until tomorrow.</div>
+                        </div>
+
+                        <div class="screen-spacer"></div>
+
+                        <div class="screen-foot">
+                            <svg viewBox="0 0 20 20" style="width:16px;height:16px" fill="none" stroke="#ddb46a" stroke-width="1.4" stroke-linecap="round">
+                                <path d="M10 17 V9"/>
+                                <path d="M10 9 C10 5.5 7 3.5 4.5 3.5 C4.5 7 6.5 9 10 9 Z"/>
+                                <path d="M10 11 C10 8 12.5 6.5 15.5 6.5 C15.5 9.5 13.5 11 10 11 Z"/>
+                            </svg>
+                            <span>A GOOD DAY TO BEGIN</span>
+                        </div>
+
+                        <div class="tabbar">
+                            <div class="tab on">
+                                <svg viewBox="0 0 24 24" style="width:20px;height:20px" fill="none" stroke="#e9ecf6" stroke-width="1.5" stroke-linecap="round">
+                                    <path d="M20 12.5 A8.5 8.5 0 1 1 11.5 4 A6.8 6.8 0 0 0 20 12.5 Z"/>
+                                </svg>
+                                TODAY
+                            </div>
+                            <div class="tab-plus">
+                                <svg viewBox="0 0 24 24" style="width:20px;height:20px" fill="none" stroke="#1b1408" stroke-width="1.9" stroke-linecap="round">
+                                    <path d="M12 6 V18"/><path d="M6 12 H18"/>
+                                </svg>
+                            </div>
+                            <div class="tab">
+                                <svg viewBox="0 0 24 24" style="width:20px;height:20px" fill="none" stroke="#6d738a" stroke-width="1.5" stroke-linecap="round">
+                                    <circle cx="12" cy="8.5" r="3.5"/>
+                                    <path d="M5 20 C5 15.5 8 13.5 12 13.5 C16 13.5 19 15.5 19 20"/>
+                                </svg>
+                                YOU
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ THREE MOTIONS ============ -->
+<section class="band">
+    <div class="container">
+        <div class="eyebrow reveal">The day has three motions.</div>
+        <div class="grid-3">
+            <div class="card reveal" style="--d: 0s;">
+                <span class="card-index">Receive</span>
+                <h3>Where the Moon is tonight</h3>
+                <p>Kosmic opens on the Moon: the lunar mansion it is crossing, one of the twenty-seven the older astronomers called nakshatras, and the phase it is holding. The reading beneath is written for that mansion and for the one you were born under, so it speaks to you rather than to everyone.</p>
+            </div>
+            <div class="card reveal" style="--d: 0.09s;">
+                <span class="card-index">Record</span>
+                <h3>The signs you notice</h3>
+                <p>An eagle over the road. A dream you can still see at breakfast. The clock reading 2:22 again. Write the line down and Kosmic recognizes the sign as you type, offering what it has long been taken to mean. Nothing is invented and nothing is guessed.</p>
+            </div>
+            <div class="card reveal" style="--d: 0.18s;">
+                <span class="card-index">Reflect</span>
+                <h3>A month you can see at once</h3>
+                <p>Your entries settle onto a calendar annotated with the Moon, so a season of small notes becomes a shape you can read. Once a week Kosmic gathers what returned, and what phase it returned under, and says it back to you plainly.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ WHO YOU ARE ============ -->
+<section class="band">
+    <div class="container">
+        <h2 class="band-title reveal">Who you are, and who you love.</h2>
+        <dl class="rows reveal">
+            <div class="row">
+                <dt>Your Big Three</dt>
+                <dd>Sun, Moon and Rising, computed from your birth moment, with the lunar mansion you were born under written out beneath them.</dd>
+            </div>
+            <div class="row">
+                <dt>The people you love</dt>
+                <dd>Keep their charts beside your own, so you can read a day through their sky as easily as through yours.</dd>
+            </div>
+            <div class="row">
+                <dt>The ring of 36</dt>
+                <dd>Ashta Koota, the classical reckoning between two charts, drawn as a ring of 36 filled units rather than a score to be won.</dd>
+            </div>
+        </dl>
+    </div>
+</section>
+
+<!-- ============ THE PROMISE ============ -->
+<section class="band promise">
+    <div class="container">
+        <h2 class="band-title reveal">What Kosmic promises.</h2>
+        <div class="grid-2">
+            <div class="promise-item reveal" style="--d: 0s;">
+                <h3>It runs on your phone</h3>
+                <p>The positions are worked out on the device, from the ephemeris, in the moment you open it. There is no account to make and no server standing behind it.</p>
+            </div>
+            <div class="promise-item reveal" style="--d: 0.07s;">
+                <h3>Nothing leaves it</h3>
+                <p>Your birth details and your journal stay where you wrote them. No analytics, no tracking, nothing collected. Delete the app and it all goes with it.</p>
+            </div>
+            <div class="promise-item reveal" style="--d: 0.14s;">
+                <h3>Written by people</h3>
+                <p>Every reading was authored by a human hand, sentence by sentence, against named classical sources. No model writes your day.</p>
+            </div>
+            <div class="promise-item reveal" style="--d: 0.21s;">
+                <h3>Computed by math</h3>
+                <p>Sidereal positions to the arcminute, so the mansion you are told the Moon is in is the mansion the Moon is in, down to the minute it crosses.</p>
+            </div>
+        </div>
+        <p class="promise-close reveal">One honest price when it launches, <span class="gold">and no advertising, ever</span>.</p>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="footer">
+            <a href="/privacy.html">Privacy</a>
+            <a href="/support.html">Support</a>
+            <a href="mailto:hello@kosmicapp.com">hello@kosmicapp.com</a>
+            <span class="footer-mark">Kosmic, by SparQan LLC</span>
+        </div>
+    </div>
+</footer>
+
+<script>
+(function () {
+    "use strict";
+
+    // Scroll reveal
+    var els = [].slice.call(document.querySelectorAll('.reveal'));
+    if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        els.forEach(function (el) { el.classList.add('visible'); });
+    } else {
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (en) {
+                if (en.isIntersecting) { en.target.classList.add('visible'); io.unobserve(en.target); }
+            });
+        }, { rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
+        els.forEach(function (el) { io.observe(el); });
+    }
+
+    // Waitlist
+    var f = document.getElementById('waitlist');
+    var s = document.getElementById('status');
+    var note = document.getElementById('formNote');
+    f.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var input = document.getElementById('email');
+        if (!input.value || input.value.indexOf('@') < 1) {
+            s.className = 'status err';
+            s.textContent = 'That address does not look complete. Please check it.';
+            return;
+        }
+        var b = f.querySelector('button');
+        b.disabled = true;
+        b.textContent = 'Sending';
+        fetch(f.action, { method: 'POST', body: new FormData(f), headers: { Accept: 'application/json' } })
+            .then(function (r) {
+                if (r.ok) {
+                    f.style.display = 'none';
+                    note.style.display = 'none';
+                    s.className = 'status';
+                    s.textContent = 'Kept. We will write to you the day it opens.';
+                } else {
+                    b.disabled = false;
+                    b.textContent = 'Keep me posted';
+                    s.className = 'status err';
+                    s.textContent = 'That did not go through. Please write to hello@kosmicapp.com and we will add you.';
+                }
+            })
+            .catch(function () {
+                b.disabled = false;
+                b.textContent = 'Keep me posted';
+                s.className = 'status err';
+                s.textContent = 'That did not go through. Please write to hello@kosmicapp.com and we will add you.';
+            });
+    });
+})();
+</script>
+
+</body>
+</html>

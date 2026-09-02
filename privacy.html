@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy &middot; Kosmic</title>
+<meta name="description" content="Kosmic collects nothing. No account, no analytics, no server. Your birth details and your journal stay on your iPhone.">
+<link rel="canonical" href="https://kosmicapp.com/privacy.html">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#1a1b3d">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+    --night: #0f141f;
+    --night-deep: #0b0f18;
+    --title: #eef1fb;
+    --body: #d9ddef;
+    --muted: #9aa3c4;
+    --gold: #ddb46a;
+    --hairline-soft: rgba(199, 210, 242, 0.09);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body {
+    background: var(--night);
+    color: var(--body);
+    font-family: 'Newsreader', Georgia, serif;
+    font-weight: 300;
+    line-height: 1.68;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+}
+::selection { background: rgba(221, 180, 106, 0.26); color: var(--title); }
+
+.page {
+    background:
+        radial-gradient(ellipse 70% 40% at 50% 0%, rgba(36, 26, 68, 0.85) 0%, rgba(36, 26, 68, 0) 68%),
+        linear-gradient(180deg, #1a1b3d 0%, #171d2c 22%, var(--night) 48%);
+    min-height: 100vh;
+    padding: 4.5rem 0 0;
+}
+.wrap { max-width: 720px; margin: 0 auto; padding: 0 1.75rem; }
+
+.back {
+    display: inline-block;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+}
+.back:hover { color: var(--gold); border-bottom-color: rgba(221, 180, 106, 0.5); }
+
+h1 {
+    font-weight: 400;
+    font-size: clamp(2.2rem, 5vw, 3rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--title);
+    margin-bottom: 0.9rem;
+}
+.updated {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    margin-bottom: 2.8rem;
+}
+.standfirst {
+    font-size: 1.28rem;
+    line-height: 1.6;
+    color: var(--title);
+    padding-bottom: 2.4rem;
+    border-bottom: 1px solid var(--hairline-soft);
+    margin-bottom: 2.6rem;
+}
+h2 {
+    font-weight: 400;
+    font-size: 1.4rem;
+    color: var(--title);
+    margin: 2.8rem 0 0.8rem;
+    letter-spacing: -0.01em;
+}
+p { font-size: 1.06rem; margin-bottom: 1.05rem; }
+ul { margin: 0 0 1.2rem 1.15rem; }
+li { font-size: 1.06rem; margin-bottom: 0.55rem; }
+strong { font-weight: 400; color: var(--title); }
+a { color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(221, 180, 106, 0.35); }
+a:hover { border-bottom-color: var(--gold); }
+
+.footer {
+    margin-top: 4.5rem;
+    padding: 2.2rem 0 4rem;
+    border-top: 1px solid var(--hairline-soft);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    align-items: center;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 0.88rem;
+    color: var(--muted);
+}
+.footer a { color: var(--muted); border-bottom-color: transparent; }
+.footer a:hover { color: var(--gold); border-bottom-color: rgba(221, 180, 106, 0.5); }
+.footer-mark { margin-left: auto; font-family: 'Newsreader', Georgia, serif; font-style: italic; }
+@media (max-width: 600px) { .footer-mark { margin-left: 0; } }
+</style>
+</head>
+<body>
+<div class="page">
+<div class="wrap">
+
+<a class="back" href="/">Kosmic</a>
+
+<h1>Privacy</h1>
+<div class="updated">Last updated 1 September 2026</div>
+
+<p class="standfirst">Kosmic does not collect anything about you. There is no account, no server, and no analytics. Your birth details and your journal live on your iPhone and stay there.</p>
+
+<h2>What Kosmic knows</h2>
+<p>To work out where the Moon is for you, Kosmic asks for your date of birth, your time of birth if you know it, and your place of birth. It keeps that on your device so it does not have to ask again. It is used for one purpose: computing your chart and your daily reading.</p>
+<p>Anything you write in the journal, and any chart you save for someone you love, is stored the same way. On the device, in the app's own storage, readable only by the app.</p>
+
+<h2>What Kosmic sends</h2>
+<p>Nothing. There is no account to create, no sign-in, and no server behind the app. The astronomy is computed on the phone from a built-in ephemeris, and every reading is already inside the app when you download it. Kosmic works with the network switched off, and it behaves identically when it is switched on.</p>
+
+<h2>What Kosmic measures</h2>
+<p>Nothing. There is no analytics software in the app, no crash reporting service, no advertising identifier, no third-party software development kits of any kind. Nobody, including us, can see how often you open Kosmic or what you wrote in it.</p>
+
+<h2>Notifications</h2>
+<p>If you turn on the daily reminder, it is scheduled by your iPhone, from the calendar Kosmic computed on your device. Notifications are local. No message is pushed to you from anywhere, because there is nowhere for it to be pushed from.</p>
+
+<h2>Backups and iCloud</h2>
+<p>If you back your iPhone up to iCloud or to a computer, Kosmic's data is included in that backup along with the rest of your apps. That backup is yours and is governed by Apple's terms, not ours. We never see it.</p>
+
+<h2>Deleting your data</h2>
+<p>Delete the app and every trace of your birth details, your journal, and your saved charts is removed with it. There is no copy anywhere else to request, correct, or erase, because none was ever made. You can also clear your entries inside the app at any time.</p>
+
+<h2>Children</h2>
+<p>Kosmic is not directed at children under 13, and because it collects nothing, it collects nothing from them either.</p>
+
+<h2>Purchases</h2>
+<p>If Kosmic offers a paid subscription, the purchase is handled entirely by Apple through the App Store. We receive Apple's sales reports, which are aggregated and never identify you. We never see your payment details.</p>
+
+<h2>The website</h2>
+<p>This site is static and has no analytics and no cookies. If you join the waiting list, your email address is sent to <a href="https://formspree.io/legal/privacy-policy" rel="noopener">Formspree</a>, which forwards it to us and stores it on our behalf. We use it for one thing: to write to you when Kosmic is out. You can ask us to remove it at any time and we will.</p>
+
+<h2>Changes</h2>
+<p>If this policy ever changes, the date at the top changes with it, and the substance will not quietly move against you.</p>
+
+<h2>Contact</h2>
+<p>Write to <a href="mailto:hello@kosmicapp.com">hello@kosmicapp.com</a> and a person will answer.</p>
+
+<div class="footer">
+    <a href="/">Home</a>
+    <a href="/support.html">Support</a>
+    <a href="mailto:hello@kosmicapp.com">hello@kosmicapp.com</a>
+    <span class="footer-mark">Kosmic, by SparQan LLC</span>
+</div>
+
+</div>
+</div>
+</body>
+</html>

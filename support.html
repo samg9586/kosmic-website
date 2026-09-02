@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Support &middot; Kosmic</title>
+<meta name="description" content="How Kosmic computes the Moon, why the Sanskrit is there, what happens when you do not know your birth time, and how to delete your data.">
+<link rel="canonical" href="https://kosmicapp.com/support.html">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#1a1b3d">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+    --night: #0f141f;
+    --title: #eef1fb;
+    --body: #d9ddef;
+    --muted: #9aa3c4;
+    --gold: #ddb46a;
+    --hairline-soft: rgba(199, 210, 242, 0.09);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body {
+    background: var(--night);
+    color: var(--body);
+    font-family: 'Newsreader', Georgia, serif;
+    font-weight: 300;
+    line-height: 1.68;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+}
+::selection { background: rgba(221, 180, 106, 0.26); color: var(--title); }
+
+.page {
+    background:
+        radial-gradient(ellipse 70% 40% at 50% 0%, rgba(36, 26, 68, 0.85) 0%, rgba(36, 26, 68, 0) 68%),
+        linear-gradient(180deg, #1a1b3d 0%, #171d2c 22%, var(--night) 48%);
+    min-height: 100vh;
+    padding: 4.5rem 0 0;
+}
+.wrap { max-width: 720px; margin: 0 auto; padding: 0 1.75rem; }
+
+.back {
+    display: inline-block;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+}
+.back:hover { color: var(--gold); border-bottom-color: rgba(221, 180, 106, 0.5); }
+
+h1 {
+    font-weight: 400;
+    font-size: clamp(2.2rem, 5vw, 3rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--title);
+    margin-bottom: 0.9rem;
+}
+.standfirst {
+    font-size: 1.28rem;
+    line-height: 1.6;
+    color: var(--title);
+    padding-bottom: 2.4rem;
+    border-bottom: 1px solid var(--hairline-soft);
+    margin-bottom: 1rem;
+}
+.q {
+    border-bottom: 1px solid var(--hairline-soft);
+    padding: 2rem 0;
+}
+.q h2 {
+    font-weight: 400;
+    font-size: 1.35rem;
+    color: var(--title);
+    margin-bottom: 0.7rem;
+    letter-spacing: -0.01em;
+}
+p { font-size: 1.06rem; margin-bottom: 1rem; }
+p:last-child { margin-bottom: 0; }
+strong { font-weight: 400; color: var(--title); }
+a { color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(221, 180, 106, 0.35); }
+a:hover { border-bottom-color: var(--gold); }
+
+.contact {
+    margin-top: 3rem;
+    padding: 1.9rem 1.8rem;
+    background: rgba(222, 228, 244, 0.035);
+    border: 1px solid var(--hairline-soft);
+    border-radius: 16px;
+}
+.contact h2 { font-weight: 400; font-size: 1.3rem; color: var(--title); margin-bottom: 0.5rem; }
+
+.footer {
+    margin-top: 3.5rem;
+    padding: 2.2rem 0 4rem;
+    border-top: 1px solid var(--hairline-soft);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    align-items: center;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 0.88rem;
+    color: var(--muted);
+}
+.footer a { color: var(--muted); border-bottom-color: transparent; }
+.footer a:hover { color: var(--gold); border-bottom-color: rgba(221, 180, 106, 0.5); }
+.footer-mark { margin-left: auto; font-family: 'Newsreader', Georgia, serif; font-style: italic; }
+@media (max-width: 600px) { .footer-mark { margin-left: 0; } }
+</style>
+</head>
+<body>
+<div class="page">
+<div class="wrap">
+
+<a class="back" href="/">Kosmic</a>
+
+<h1>Support</h1>
+
+<p class="standfirst">A few things worth knowing. If your question is not here, write to us and a person will answer.</p>
+
+<div class="q">
+    <h2>What does Kosmic actually compute?</h2>
+    <p>The real positions of the Sun and the Moon for your moment and your place, using a built-in ephemeris, then the sidereal positions with the Lahiri correction applied. From those it derives the lunar mansion the Moon is crossing, the exact clock time it entered and the time it leaves, the lunar day and its half of the month, illumination, and sunrise and sunset as the boundaries of the Vedic day.</p>
+    <p>All of it happens on your iPhone. Kosmic states which ephemeris and which correction it used, inside the app, because a reader is owed that.</p>
+</div>
+
+<div class="q">
+    <h2>Is any of this generated by AI?</h2>
+    <p>No. The astronomy is arithmetic. Every reading, every profile, and every meaning attached to a sign in the journal was written by a human hand against named classical sources. Nothing about your day is produced by a language model.</p>
+</div>
+
+<div class="q">
+    <h2>Why is there Sanskrit?</h2>
+    <p>Because the names are the tradition's own, and translating them away loses something. English leads everywhere in Kosmic and the Sanskrit sits beneath it, so you can read the app fluently on day one and pick up the vocabulary if you want it. You are never asked to learn a word to use a screen.</p>
+</div>
+
+<div class="q">
+    <h2>I do not know my birth time.</h2>
+    <p>You can skip it. The Moon crosses about one mansion a day, so on most dates it makes no difference at all, and on those dates Kosmic proceeds quietly at local noon and says nothing, because there is nothing uncertain to say.</p>
+    <p>On a date where the Moon does change mansion, Kosmic tells you plainly that your birth time decides which of the two you were born under, shows you both, and lets you pick or leave it open. Your Rising sign does need a time, so that part waits until you have one. You can add or correct your birth details later without losing anything.</p>
+</div>
+
+<div class="q">
+    <h2>Can I keep charts for other people?</h2>
+    <p>Yes. Save the birth details of the people you love and read a day through their sky as well as your own. Between two saved charts, Kosmic draws Ashta Koota, the classical reckoning, as a ring of 36 filled units. It is a shape to think with, not a verdict, and Kosmic never phrases it as one.</p>
+</div>
+
+<div class="q">
+    <h2>Does Kosmic work without a signal?</h2>
+    <p>Completely. There is no account and no server. Kosmic in airplane mode behaves exactly as it does at home.</p>
+</div>
+
+<div class="q">
+    <h2>How do I delete my data?</h2>
+    <p>Delete the app. Your birth details, your journal, and your saved charts go with it, because no copy of them was ever made anywhere else. Inside the app you can also clear journal entries or remove a saved chart one at a time.</p>
+    <p>If your iPhone backs up to iCloud, the app's data is inside that backup until the backup is replaced. That backup belongs to you and we never see it. The full account is in the <a href="/privacy.html">privacy policy</a>.</p>
+</div>
+
+<div class="q">
+    <h2>Which iPhones does it run on?</h2>
+    <p>iPhone, iOS 17 and later. Kosmic is coming to the App Store, with a TestFlight round first.</p>
+</div>
+
+<div class="contact">
+    <h2>Still need us</h2>
+    <p>Write to <a href="mailto:hello@kosmicapp.com">hello@kosmicapp.com</a>. Tell us what happened and which iPhone you are on, and you will hear back from a person.</p>
+</div>
+
+<div class="footer">
+    <a href="/">Home</a>
+    <a href="/privacy.html">Privacy</a>
+    <a href="mailto:hello@kosmicapp.com">hello@kosmicapp.com</a>
+    <span class="footer-mark">Kosmic, by SparQan LLC</span>
+</div>
+
+</div>
+</div>
+</body>
+</html>

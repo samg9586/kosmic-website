@@ -1,0 +1,4 @@
+# Defensive domain: every request bounces to the brand home with its path intact.
+https://getkosmic.com/* https://kosmicapp.com/:splat 301
+https://www.getkosmic.com/* https://kosmicapp.com/:splat 301
+https://www.kosmicapp.com/* https://kosmicapp.com/:splat 301

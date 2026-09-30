@@ -2,3 +2,10 @@
 https://getkosmic.com/* https://kosmicapp.com/:splat 301
 https://www.getkosmic.com/* https://kosmicapp.com/:splat 301
 https://www.kosmicapp.com/* https://kosmicapp.com/:splat 301
+
+# The terms of use are Apple's standard EULA (the CEO's answer to D2,
+# 2026-09-30). The app links the EULA directly; builds 1 to 9 link /terms
+# from the paywall, and this is what they land on. 302, not 301, so a page of
+# our own can take the address later without browsers holding the redirect.
+/terms https://www.apple.com/legal/internet-services/itunes/dev/stdeula/ 302
+/terms/ https://www.apple.com/legal/internet-services/itunes/dev/stdeula/ 302

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Not found &middot; Kosmic</title>
+<meta name="description" content="There is no page at this address on kosmicapp.com.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#1a1b3d">
+<!-- Served by Cloudflare Pages for any path with no file, with a 404 status.
+     Its presence is also what stops Pages treating the site as a single-page
+     app, which answered every unknown path with the homepage and a 200.
+     Every address here is absolute, because this page is served at any depth. -->
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+    --night: #0f141f;
+    --title: #eef1fb;
+    --body: #d9ddef;
+    --muted: #9aa3c4;
+    --gold: #ddb46a;
+    --hairline-soft: rgba(199, 210, 242, 0.09);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body {
+    background: var(--night);
+    color: var(--body);
+    font-family: 'Newsreader', Georgia, serif;
+    font-weight: 300;
+    line-height: 1.68;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+}
+::selection { background: rgba(221, 180, 106, 0.26); color: var(--title); }
+
+.page {
+    background:
+        radial-gradient(ellipse 70% 40% at 50% 0%, rgba(36, 26, 68, 0.85) 0%, rgba(36, 26, 68, 0) 68%),
+        linear-gradient(180deg, #1a1b3d 0%, #171d2c 22%, var(--night) 48%);
+    min-height: 100vh;
+    padding: 4.5rem 0 0;
+}
+.wrap { max-width: 720px; margin: 0 auto; padding: 0 1.75rem; }
+
+.back {
+    display: inline-block;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+}
+.back:hover { color: var(--gold); border-bottom-color: rgba(221, 180, 106, 0.5); }
+
+h1 {
+    font-weight: 400;
+    font-size: clamp(2.2rem, 5vw, 3rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--title);
+    margin-bottom: 1.4rem;
+}
+p { font-size: 1.06rem; margin-bottom: 1.05rem; }
+.standfirst { font-size: 1.28rem; line-height: 1.6; color: var(--title); }
+a { color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(221, 180, 106, 0.35); }
+a:hover { border-bottom-color: var(--gold); }
+
+.footer {
+    margin-top: 4.5rem;
+    padding: 2.2rem 0 4rem;
+    border-top: 1px solid var(--hairline-soft);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    align-items: center;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 0.88rem;
+    color: var(--muted);
+}
+.footer a { color: var(--muted); border-bottom-color: transparent; }
+.footer a:hover { color: var(--gold); border-bottom-color: rgba(221, 180, 106, 0.5); }
+.footer-mark { margin-left: auto; font-family: 'Newsreader', Georgia, serif; font-style: italic; }
+@media (max-width: 600px) { .footer-mark { margin-left: 0; } }
+</style>
+</head>
+<body>
+<div class="page">
+<div class="wrap">
+
+<a class="back" href="/">Kosmic</a>
+
+<h1>Not here</h1>
+
+<p class="standfirst">There is no page at this address.</p>
+<p>Start again from the <a href="/">home page</a>, or find what you need in <a href="/support">support</a>.</p>
+
+<div class="footer">
+    <a href="/">Home</a>
+    <a href="/privacy">Privacy</a>
+    <a href="/support">Support</a>
+    <a href="mailto:hello@kosmicapp.com">hello@kosmicapp.com</a>
+    <span class="footer-mark">Kosmic, by SparQan LLC</span>
+</div>
+
+</div>
+</div>
+</body>
+</html>
